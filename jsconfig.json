@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@core/*": ["src/core/*"],
+      "@views/*": ["src/core/views/*"],
+      "@components/*": ["src/core/views/components/*"],
+      "@factory/*": ["src/core/factory/*"],
+      "@hooks/*": ["src/core/views/hooks/*"],
+      "@constants": ["src/core/constants"],
+      "@observers/*": ["src/core/observers/*"],
+      "@contexts/*": ["src/core/contexts/*"],
+      "@utils/*": ["src/core/utils/*"],
+      "@src/*": ["src/*"]
+    }
+  },
+  "exclude": ["node_modules"]
+}
