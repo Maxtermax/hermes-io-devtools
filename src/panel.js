@@ -7,7 +7,14 @@ class MessageBroker {
   };
 
   notify(message) {
-    this.port.postMessage(message);
+    try {
+      this.port.postMessage(message);
+    } catch (error) {
+      console.log(error);
+      alert(
+        "Devtool has disconnected, please close and reopen the page to continue."
+      );
+    }
   }
 }
 
