@@ -1,7 +1,7 @@
 {
     "manifest_version": 3,
     "name": "Hermes IO",
-    "description": "Hermes IO devtools",
+    "description": "Developer tool that allows debugging step by step the changes on websites that uses hermes-io.js in a nice/easy to use UI.",
     "version": "1.0",
     "icons": {
         "16": "public/assets/images/icon_16.png",
@@ -16,7 +16,6 @@
     "background": {
         "service_worker": "background.js"
     },
-    "permissions": ["tabs"],
     "content_scripts": [
         {
             "js": [
