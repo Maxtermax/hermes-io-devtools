@@ -6,7 +6,7 @@ Chrome extension that allows nspect and debug in detail events emitted by [herme
  - Inspect source code
  - Copy record payload
  
- ### Instalation
+ ### Installation
 
  #### Clone the repo 
  ```
