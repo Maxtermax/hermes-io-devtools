@@ -26,3 +26,5 @@ Then go to: ```chrome://extensions``` and load the extension by clicking on butt
 Then try the demo: https://sneaker-store-1.vercel.app/ 
 
 ![Demo](demo.gif)
+
+If you find me work helpful please consider support me at https://www.buymeacoffee.com/maxtermax, that encourage me to continue working on cool open source projects.
