@@ -18,12 +18,6 @@ class MessageBroker {
   }
 }
 
-const actions = {
-  context: (message = {}) => {
-    // console.log("panel.js context: ", message);
-  },
-};
-
 function initializatedPanel(panel) {
   const broker = new MessageBroker();
   broker.init((event = {}) => {

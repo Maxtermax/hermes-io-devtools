@@ -26,6 +26,6 @@ broker.init((message) => {
     return broker.ports[message.port].postMessage(message);
   } catch (error) {
     console.log(error);
-    alert('Devtool has disconnected, please close and reopen the page to continue.');
+    console.log('Devtool has disconnected, please close and reopen the page to continue.');
   }
 });

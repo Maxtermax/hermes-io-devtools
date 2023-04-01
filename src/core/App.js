@@ -29,7 +29,8 @@ function useLoadDefaultSourceMap({ sourceMap, sourceMapPath, host }) {
       });
       console.log({ error, success });
     }
-    if (sourceMapPath && !sourceMap) {
+    const hasHostResolved = host && host.startsWith("http"); 
+    if (sourceMapPath && !sourceMap && hasHostResolved) {
       loadSourceMap();
     }
   }, [host, sourceMap, sourceMapPath, contexts.sourceMapPicker]);
