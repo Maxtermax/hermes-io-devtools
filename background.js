@@ -6,10 +6,11 @@ class MessageBroker {
     chrome.runtime.onConnect.addListener((port) => {
       const { name } = port;
       this.ports[name] = port;
+      const ports = this.ports; 
       port.onMessage.addListener(onMessage);
       port.onDisconnect.addListener(function () {
-        if (this.ports && this.ports[name]) {
-          delete this.ports[name];
+        if (ports[name]) {
+          delete ports[name];
         }
       });
     });

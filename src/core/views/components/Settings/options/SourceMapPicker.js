@@ -4,10 +4,9 @@ import Box from "@mui/material/Box";
 import * as contexts from "@contexts/Hermes";
 import * as CONSTANTS from "@constants";
 import observers from "@observers/Settings";
-import IconButton from "@mui/material/IconButton";
+import Button from "@mui/material/Button";
 import Notification from "@components/Notification/Notification";
 import Typography from "@mui/material/Typography";
-import SaveIcon from "@mui/icons-material/Save";
 import Spinner from "../../Spinner/Spinner";
 import useSelector from "@hooks/useSelector";
 import { setItemFromLocalStorage } from "@utils/storage";
@@ -15,8 +14,7 @@ import { setItemFromLocalStorage } from "@utils/storage";
 function useDefaultPath({ sourceMapPath, path, setPath }) {
   const refPath = useRef(null);
   useEffect(() => {
-    const hasDefault = path === "" && refPath.current === '';
-    console.log('prev: ', refPath.current, 'current: ', path, ' default: ', hasDefault);
+    const hasDefault = path === "" && refPath.current === "";
     // set default path
     if (sourceMapPath && hasDefault) {
       setPath(sourceMapPath);
@@ -82,6 +80,7 @@ export default function SourceMapPicker({
         gridTemplateColumns: "0.3fr 0.6fr 80px",
         alignItems: "center",
         gap: "5px",
+        justifyItems: "start",
       }}
     >
       <Typography>{host}</Typography>
@@ -95,14 +94,15 @@ export default function SourceMapPicker({
         maxRows={2}
       />
       {hasPathReady && !isLoading ? (
-        <IconButton
-          sx={{ width: "50px" }}
+        <Button
+          variant="outlined"
           aria-label="save"
+          color="secondary"
           size="large"
           onClick={handleConfirm}
         >
-          <SaveIcon />
-        </IconButton>
+          Save
+        </Button>
       ) : null}
       {isLoading ? <Spinner /> : null}
       <Notification

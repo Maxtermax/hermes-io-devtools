@@ -21,8 +21,19 @@ function Settings(props = {}) {
             paddingTop: "15px",
           }}
         >
-          <Typography>Settings</Typography>
-          <IconButton color="secondary" component="label" onClick={props.onClose}>
+          <Typography
+            variant="body1"
+            sx={{
+              fontWeight: "bold",
+            }}
+          >
+            Settings
+          </Typography>
+          <IconButton
+            color="secondary"
+            component="label"
+            onClick={props.onClose}
+          >
             <CloseIcon />
           </IconButton>
         </DialogTitle>
