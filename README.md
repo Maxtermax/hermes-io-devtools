@@ -5,7 +5,8 @@ Chrome extension that allows inspect and debug in detail events emitted by [herm
  - Play one or many events recorded previously
  - Inspect source code
  - Copy record payload
- 
+  
+ Install from chrome web store [here](https://chrome.google.com/webstore/detail/hermes-io/pjdkgcpikfmkncldipldmimanfkpeedm?hl=en)
  ### Installation
 
  #### Clone the repo 
