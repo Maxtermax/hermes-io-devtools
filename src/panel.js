@@ -1,9 +1,12 @@
 let panelWindow;
 
 class MessageBroker {
-  init = (onMessage) => {
+  setup = (onMessage) => {
     this.port = chrome.runtime.connect({ name: "panel" });
     this.port.onMessage.addListener(onMessage);
+  };
+  init = (onMessage) => {
+    this.setup(onMessage);
   };
 
   notify(message) {
@@ -29,10 +32,6 @@ function initializatedPanel(panel) {
     panelWindow = extPanelWindow;
   });
 }
-
-chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-  // console.log('tabs: ', tabs);
-});
 
 chrome.devtools.panels.create(
   "Hermes",
