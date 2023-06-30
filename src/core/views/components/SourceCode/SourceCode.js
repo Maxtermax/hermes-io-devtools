@@ -26,7 +26,7 @@ const SourceCode = (props = {}) => {
         variant="overline"
         display="block"
       >
-        No sourcemap available. 
+        No sourcemap available or fail to parsed it, please check you build tools configuration. 
       </Typography>
     );
   }

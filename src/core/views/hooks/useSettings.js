@@ -7,7 +7,6 @@ import observers from "@observers/Settings";
 import ThemeObservers from "@observers/Theme";
 import { getItemFromLocalStorage } from "@utils/storage";
 import buildTheme from "@factory/Theme";
-import useHost from './useHost';
 
 const useSourceMap = () => {
   const [sourceMap, setSourceMap] = useState(null);
@@ -44,11 +43,9 @@ const fetchSourceMap = async (url = "", controller = {}) => {
 const useSettings = () => {
   const [theme, setTheme] = useState(CONSTANTS.theme.modes.light);
   const [language, setLanguage] = useState("en");
-  const host = useHost();
   const { sourceMap } = useSourceMap();
   const isSourceMapReady = !!sourceMap;
   const settings = {
-    host,
     [CONSTANTS.SOURCEMAP_PATH]: getItemFromLocalStorage(CONSTANTS.SOURCEMAP_PATH),
     theme,
     setTheme,

@@ -14,6 +14,8 @@ import StartToggle from "./options/StartToggle";
 import DrawerButton from "./options/DrawerButton";
 import Settings from "./options/Settings";
 import Title from "./Title";
+import Download from "./options/Download";
+import Upload from "./options/Upload";
 
 const Header = (props = {}) => {
   const {
@@ -28,6 +30,8 @@ const Header = (props = {}) => {
     onToggleDrawer = () => {},
     onSettings = () => {},
     onDeleteRecording = () => {},
+    onDownload = () => {},
+    onUpload = () => {},
     onStopRecording = () => {},
     onStartRecording = () => {},
     /* onUploadRecording = () => null,*/
@@ -83,9 +87,10 @@ const Header = (props = {}) => {
               onStopRecording={onStopRecording}
             />
           )}
-          {hasContexts && (
+          {hasContexts ? (
             <>
               {isProgressCompleted && <Replay onReplay={onReplay} />}
+              <Download onDownload={onDownload} />
               <Delete onDeleteRecording={onDeleteRecording} />
               {hasNoProgress && <PlayRecording onPlay={onPlay} />}
               {progress > 0 && progress < 100 && (
@@ -97,7 +102,7 @@ const Header = (props = {}) => {
                 />
               )}
             </>
-          )}
+          ) : null}
           <Divider orientation="vertical" flexItem />
           <Settings onClick={onSettings} />
         </Stack>

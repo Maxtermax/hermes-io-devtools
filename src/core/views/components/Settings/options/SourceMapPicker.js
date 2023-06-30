@@ -6,7 +6,6 @@ import * as CONSTANTS from "@constants";
 import observers from "@observers/Settings";
 import Button from "@mui/material/Button";
 import Notification from "@components/Notification/Notification";
-import Typography from "@mui/material/Typography";
 import Spinner from "../../Spinner/Spinner";
 import useSelector from "@hooks/useSelector";
 import { setItemFromLocalStorage } from "@utils/storage";
@@ -30,7 +29,6 @@ export default function SourceMapPicker({
   const [success, setSuccess] = useState(false);
   const [isLoading, setLoading] = useState(false);
   const [hasRequestFailed, setRequestFailed] = useState(false);
-  const host = useSelector(contexts.selector, "host");
   const sourceMapPath = useSelector(
     contexts.selector,
     CONSTANTS.SOURCEMAP_PATH
@@ -57,7 +55,7 @@ export default function SourceMapPicker({
       context: contexts.sourceMapPicker,
       value: {
         controller,
-        url: `${host}${path}`,
+        url: path,
       },
     });
     setLoading(false);
@@ -77,34 +75,36 @@ export default function SourceMapPicker({
       autoComplete="off"
       sx={{
         display: "grid",
-        gridTemplateColumns: "0.3fr 0.6fr 80px",
-        alignItems: "center",
-        gap: "5px",
-        justifyItems: "start",
+        paddingTop: "10px",
+        gridTemplateColumns: "1fr 80px",
+        placeItems: "normal",
+        gap: "15px",
       }}
     >
-      <Typography>{host}</Typography>
-      <TextField
-        variant="standard"
-        placeholder="Path to sourcemap"
-        onChange={handlePathChange}
-        value={path}
-        disabled={isLoading}
-        multiline
-        maxRows={2}
-      />
-      {hasPathReady && !isLoading ? (
-        <Button
-          variant="outlined"
-          aria-label="save"
-          color="secondary"
-          size="large"
-          onClick={handleConfirm}
-        >
-          Save
-        </Button>
-      ) : null}
-      {isLoading ? <Spinner /> : null}
+      {isLoading ? (
+        <Spinner />
+      ) : (
+        <>
+          <TextField
+            variant="filled"
+            placeholder="Path to sourcemap"
+            onChange={handlePathChange}
+            value={path}
+            disabled={isLoading}
+            maxRows={1}
+          />
+          <Button
+            variant="outlined"
+            aria-label="save"
+            color="secondary"
+            disabled={!hasPathReady || isLoading}
+            size="large"
+            onClick={handleConfirm}
+          >
+            Save
+          </Button>
+        </>
+      )}
       <Notification
         open={success}
         text="Sourcemap loaded"

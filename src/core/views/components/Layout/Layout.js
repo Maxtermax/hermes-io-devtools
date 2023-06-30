@@ -59,6 +59,27 @@ const Layout = () => {
     setContexts(newContexts);
   };
 
+  const getCurrentDateTime = () => {
+    const currentDate = new Date();
+    const dateString = currentDate.toLocaleDateString(); // Get the date portion
+    const timeString = currentDate.toLocaleTimeString(); // Get the time portion
+    return dateString + " " + timeString;
+  }
+
+  const handleDownload = () => {
+    const data = JSON.stringify(contexts);
+    const blob = new Blob([data], { type: "application/json" });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = getCurrentDateTime(); 
+    link.click();
+  }
+
+  const handleUpload = (newContexts) => {
+    setContexts(newContexts);
+    console.log('upload');
+  }
+
   const updateProgress = () => {
     if (contexts[itemPlayingIndex]) {
       const newContexts = contexts.map((context) => ({
@@ -158,6 +179,8 @@ const Layout = () => {
         hasContexts={contexts.length > 0}
         progress={progress}
         collection={collection}
+        onUpload={handleUpload}
+        onDownload={handleDownload}
         onSettings={handleSettings}
         onStopRecording={handleStopRecoding}
         onStartRecording={handleStartRecording}

@@ -41,7 +41,7 @@ class MessageBroker {
   };
 
   notify = (name, message) => {
-    chrome.tabs.query({ active: true, lastFocusedWindow: true }, (tabs) => {
+    chrome.tabs.query({ active: true }, (tabs) => {
       const [tab] = tabs;
       this.currentTab = tab;
       const subscriptor = this.subscribers.find(

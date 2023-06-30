@@ -4,8 +4,9 @@ import useSourceMapConsumer from "@core/views/hooks/useSourceMapConsumer";
 import settings from "@observers/Settings";
 import processText from "./processText";
 import extractLocationFromStackTrace from "./extractLocationFromStackTrace";
+import extractNameFromStackTrace from "./extractNameFromStackTrace";
 
-const useSourceMapObject = ({ stackTrace = "", name = "" }) => {
+const useSourceMapObject = ({ stackTrace = "" }) => {
   const [srcObject, setSrcObject] = useState({
     hasSourceMap: false,
     source: "",
@@ -14,6 +15,7 @@ const useSourceMapObject = ({ stackTrace = "", name = "" }) => {
     column: 0,
   });
   const sourceMapConsumer = useSourceMapConsumer();
+  const name = extractNameFromStackTrace(stackTrace);
   useEffect(() => {
     const buildObject = async () => {
       const sourceMap = await settings.selector.notify({
@@ -26,9 +28,10 @@ const useSourceMapObject = ({ stackTrace = "", name = "" }) => {
           stackTrace,
           name,
         });
-        const { source, line, column } =
-          consumer.originalPositionFor(stackTracePositions);
-        const content = consumer.sourcesContent[column];
+        const position = consumer.originalPositionFor(stackTracePositions);
+        const { source = '', line, column } = position;
+        const index = consumer._absoluteSources.indexOf(source);
+        const content = consumer.sourcesContent[index];
         const contentByLines = content.split(/\n/g);
         const start = contentByLines.findIndex((line) => line.includes(name));
         const highlightLine = contentByLines[line - 1];
@@ -43,7 +46,11 @@ const useSourceMapObject = ({ stackTrace = "", name = "" }) => {
         setSrcObject({ source, code, content, line, column, highlight, hasSourceMap: true });
       });
     };
-    buildObject();
+    try {
+      buildObject();
+    } catch (error) {
+      console.error(error);
+    } 
   }, []);
   return srcObject;
 };
