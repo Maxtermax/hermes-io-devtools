@@ -26,6 +26,7 @@ broker.init().onMessage.addListener(function handleMessageFromDevtools(event) {
 window.addEventListener(
   "message",
   function handleMessageFromHermesIO({ data = {} }) {
+    console.log('MESAGE FROM HERMES: ', data);
     const { payload, type, source } = data;
     if (source === "hermes-io") {
       broker.notify({ port: "panel", type, payload, source }); // notify message from hermer-io.js to panel

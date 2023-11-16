@@ -10,12 +10,11 @@ import PlayRecording from "./options/PlayRecording";
 import Replay from "./options/Replay";
 import Delete from "./options/Delete";
 import StartToggle from "./options/StartToggle";
-// import UploadRecording from "./options/UploadRecording";
+import UploadRecording from "./options/UploadRecording";
 import DrawerButton from "./options/DrawerButton";
 import Settings from "./options/Settings";
 import Title from "./Title";
 import Download from "./options/Download";
-import Upload from "./options/Upload";
 
 const Header = (props = {}) => {
   const {
@@ -34,7 +33,6 @@ const Header = (props = {}) => {
     onUpload = () => {},
     onStopRecording = () => {},
     onStartRecording = () => {},
-    /* onUploadRecording = () => null,*/
   } = props;
 
   const isInProgress = progress > 0 && progress <= 100;
@@ -65,27 +63,28 @@ const Header = (props = {}) => {
           {/*<DrawerButton onClick={onToggleDrawer} />*/}
           <Title />
         </Stack>
-        <Stack
-          direction="row"
-          spacing={2}
+        <Box
           sx={{
             padding: "4px",
             paddingLeft: "10px",
-            paddingRight: "10px",
+            paddingRight: "20px",
             borderRadius: "4px",
             transition: "all 0.35s ease-in-out",
+            display: "grid",
+            maxWidth: "600px",
+            gap: "20px",
+            gridTemplateColumns: "repeat( auto-fit, 40px)",
           }}
         >
-          {/*!recording && !isInProgress && (
-            <UploadRecording onUploadRecording={onUploadRecording} />
-          )*/}
-
           {!hasContexts && (
             <StartToggle
               recording={recording}
               onStartRecording={onStartRecording}
               onStopRecording={onStopRecording}
             />
+          )}
+          {!recording && !isInProgress && (
+            <UploadRecording onUploadRecording={onUpload} />
           )}
           {hasContexts ? (
             <>
@@ -103,9 +102,8 @@ const Header = (props = {}) => {
               )}
             </>
           ) : null}
-          <Divider orientation="vertical" flexItem />
           <Settings onClick={onSettings} />
-        </Stack>
+        </Box>
       </Toolbar>
     </AppBar>
   );

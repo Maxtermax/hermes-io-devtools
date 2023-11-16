@@ -1,16 +1,20 @@
+// V3
 class MessageBroker {
   constructor() {
     this.subscribers = [];
     this.currentTab = {};
     chrome.tabs.onCreated.addListener((tab) => {
       this.currentTab = tab;
+      console.log('NEW TAB CREATED: ', tab);
     });
     chrome.tabs.onRemoved.addListener((tabId) => {
       this.removeSubscriber(tabId);
+      console.log('REMOVED TAB: ', tabId);
       this.currentTab = {};
     });
   }
   init = (onMessage) => {
+    console.log('INIT: ', onMessage);
     chrome.runtime.onConnect.addListener((port) => {
       const { name } = port;
       if (!this.currentTab.id) return;
@@ -18,6 +22,7 @@ class MessageBroker {
       const subscribers = this.subscribers;
       subscribers.push({ id, name, port });
       port.onMessage.addListener(onMessage);
+      console.log('')
       port.onDisconnect.addListener(() => {
         this.removeSubscriber(id);
       });
@@ -42,12 +47,14 @@ class MessageBroker {
 
   notify = (name, message) => {
     chrome.tabs.query({ active: true }, (tabs) => {
-      const [tab] = tabs;
-      this.currentTab = tab;
-      const subscriptor = this.subscribers.find(
-        (subscriber) => subscriber.id === tab.id && subscriber.name === name
-      );
-      subscriptor?.port?.postMessage?.(message);
+      if (tabs) {
+        const [tab] = tabs;
+        this.currentTab = tab;
+        const subscriptor = this.subscribers.find(
+          (subscriber) => subscriber.id === tab.id && subscriber.name === name
+        );
+        subscriptor?.port?.postMessage?.(message);
+      }
     });
   };
 }

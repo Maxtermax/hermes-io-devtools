@@ -76,8 +76,14 @@ const Layout = () => {
   }
 
   const handleUpload = (newContexts) => {
+    window.postMessage(
+      {
+        source: "hermes-io-devtools",
+        payload: { type: "LOAD_RECORDING", recording: newContexts },
+      },
+      "*"
+    );
     setContexts(newContexts);
-    console.log('upload');
   }
 
   const updateProgress = () => {

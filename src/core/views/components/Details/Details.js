@@ -26,7 +26,7 @@ const Details = (props = {}) => {
       {data.map(({ date, playing, stackTrace, value, listener, id }) => (
         <List key={id}>
           <Item playing={playing} anchor={anchor}>
-            <PlayContext onSetContext={onSetContext } id={id}  />
+            <PlayContext onSetContext={onSetContext} id={id}  />
             <VerticalBar playing={playing} />
             <Panel>
               <Title name={listener} />

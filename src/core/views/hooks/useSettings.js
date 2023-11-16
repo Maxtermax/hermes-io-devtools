@@ -57,7 +57,7 @@ const useSettings = () => {
 
   useObserver({
     observer: observers.selector,
-    listener: ({ value }, callback) => callback(settings[value]),
+    listener: ({ value }, callback) => callback?.(settings[value]),
     contexts: [contexts.selector],
   });
 
