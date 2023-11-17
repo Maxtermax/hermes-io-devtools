@@ -11,7 +11,8 @@ class MessageBroker {
 
 const broker = new MessageBroker();
 
-broker.init().onMessage.addListener(function handleMessageFromDevtools(event) {
+const port = broker.init();
+port.onMessage.addListener(function handleMessageFromDevtools(event) {
   const { data = {} } = event;
   const { source = "", payload = "" } = data;
   if (source === "hermes-io-devtools") {
@@ -22,6 +23,10 @@ broker.init().onMessage.addListener(function handleMessageFromDevtools(event) {
     window.postMessage({ ...data }, "*"); // send message to hermes-io.js
   }
 });
+console.log({ port });
+port.onDisconnect.addListener(function handleDisconnection(event) {
+  console.log('DISCONNECTED:', { event });
+})
 
 window.addEventListener(
   "message",

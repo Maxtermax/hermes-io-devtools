@@ -10,7 +10,7 @@ const Panel = ({ children }) => (
       paddingTop: "10px",
       paddingBottom: "10px",
       borderRadius: "0px",
-      width: "80%",
+      width: "100%",
     }}
   >
     {children}

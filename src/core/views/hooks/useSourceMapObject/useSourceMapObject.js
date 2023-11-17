@@ -32,6 +32,7 @@ const useSourceMapObject = ({ stackTrace = "" }) => {
         const { source = '', line, column } = position;
         const index = consumer._absoluteSources.indexOf(source);
         const content = consumer.sourcesContent[index];
+        if (!content) return setSrcObject({ source, code: "", content: "", hasSourceMap: false }); 
         const contentByLines = content.split(/\n/g);
         const start = contentByLines.findIndex((line) => line.includes(name));
         const highlightLine = contentByLines[line - 1];
