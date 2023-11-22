@@ -1,4 +1,4 @@
-# Hermes IO Devtools ⚡
+# Hermes-io Inspector 🔍
 Chrome extension that allows inspect and debug in detail events emitted by [hermes-io.js](https://www.npmjs.com/package/hermes-io#get-started) in a friendly UI.
 ### Features
  - Record events
