@@ -30,11 +30,6 @@ Then try the demo: https://sneaker-store-1.vercel.app/
 
 Also you can try the counter demo: [here](https://stackblitz.com/~/github.com/Maxtermax/hermes-io-counter-demo)
 
-
-
 https://github.com/Maxtermax/hermes-io-devtools/assets/4247989/5e7dcaa5-cb0d-4a00-a685-4f65884a071c
-
-
-
 
 If you find me work helpful please consider support me at https://www.buymeacoffee.com/maxtermax, that encourage me to continue working on cool open source projects.
